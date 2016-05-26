@@ -1,0 +1,9 @@
+TMP_DIR: ''
+DATA_DIR: ''
+
+news_host: 'http://feed.omgili.com/5Rh5AMTrc4Pv/mainstream/posts/'
+
+redis:
+  list_name: 'NEWS_LIST'
+  host_name: ''
+  port: ''
