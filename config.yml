@@ -1,9 +1,8 @@
-TMP_DIR: ''
-DATA_DIR: ''
+TMP_DIR: '~/nimir_git/posts_monster/data/tmp/'
+DATA_DIR: '~/nimir_git/posts_monster/data/posts/'
 
-news_host: 'http://feed.omgili.com/5Rh5AMTrc4Pv/mainstream/posts/'
+news_host: 'http://feed.omgili.com/5Rh5AMTrc4Pv/mainstream/posts/1464993367242.zip'
 
 redis:
-  list_name: 'NEWS_LIST'
-  host_name: ''
-  port: ''
+  host_name: 'localhost'
+  port: '6379'

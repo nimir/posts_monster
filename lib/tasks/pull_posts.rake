@@ -1,13 +1,18 @@
-require 'open-uri'
-require 'nokogiri'
+require_relative '../utils/job.rb'
 
-include Sidekiq::Worker
+desc "pull folders list and if there are new ones pull posts to the redis list"
 
-desc "Task description"
 task :default do
+  @job = Job.new
+  folders = @job.pull_posts_folders_list
+  puts "Found: #{folders.size} folders online - last folder is #{folders.last.to_s}"
 
-  page = Nokogiri::HTML(open('http://feed.omgili.com/5Rh5AMTrc4Pv/mainstream/posts/').read)
-  links = page.xpath('//table/tr/td/a/@href').collect(&:value).drop(1)
+  puts ".........................................."
+  puts "............ Pulling Posts ..............."
+  puts ".........................................."
 
-
+  folders.each_with_index do |folder, index|
+    puts "[#{index+1}] -----stored background job to pull folder: #{folder}"
+    Job.perform_async(folder)
+  end
 end

@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'sidekiq'
 gem 'nokogiri'
 gem 'redis'
-gem 'sidekiq'
 
 # Specify your gem's dependencies in posts_monster.gemspec
 gemspec

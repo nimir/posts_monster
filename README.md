@@ -1,36 +1,36 @@
-# PostsMonster
+# Posts Monster
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/posts_monster`. To experiment with that code, run `bin/console` for an interactive prompt.
+Hi, this monster will look for remote folders, download and unzip them then finally push content to a redis list. While skipping already fetched folders.
 
-TODO: Delete this and the text above, and describe your gem
+It is done by two methods in `lib/utils` wrapped in a `rake` task. The actualy downloading, unziping and pushing to `redis` is done in the background using `Sidekiq`
 
-## Installation
+###We are using the following gems:
 
-Add this line to your application's Gemfile:
+- open-uri
+- nokogiri
+- redis
+- sidekiq
 
-```ruby
-gem 'posts_monster'
+###You will need to do:
+
+```bash
+bundle install
 ```
 
-And then execute:
+###Prepare following directories:
 
-    $ bundle
+```bash
+mkdir data && mkdir data/tmp && mkdir data/posts
+```
 
-Or install it yourself as:
+###Fire *Sidekiq*:
 
-    $ gem install posts_monster
+```bash
+sidekiq -r ./lib/utils/job.rb
+```
 
-## Usage
+Then to start pulling posts, it's a simple rake task so running rake should fire it
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/posts_monster.
-
+```bash
+rake
+```
